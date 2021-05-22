@@ -5,6 +5,7 @@
     "allowJs": true,
     "checkJs": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "declaration": true,
     "target": "ES6",
     "module": "CommonJS",
     "moduleResolution": "node",
