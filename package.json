@@ -12,8 +12,8 @@
     "url": "git+https://github.com/userscripters/template.git"
   },
   "keywords": [],
-  "author": "Oleg Valter",
-  "license": "GPL-3.0+",
+  "author": "Oleg Valter <oleg.a.valter@gmail.com>",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/userscripters/template/issues"
   },
