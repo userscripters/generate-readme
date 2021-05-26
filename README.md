@@ -11,5 +11,5 @@
 # Support
 
 Bug reports for the project should be [submitted here](https://github.com/userscripters/template/issues).
-Before adding a new one, please check if it hasn't been raised before.
+<br>Before adding a new one, please check if it hasn't been raised before.
   

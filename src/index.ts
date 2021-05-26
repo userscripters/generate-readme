@@ -1,7 +1,7 @@
 import { bgRed } from "chalk";
-import { readFile } from "fs/promises";
 import { addArg, getValueArg, parseArgs } from "./cli";
 import { generateReadme } from "./readme";
+import { getPackage } from "./utils";
 
 export type PackageInfo = {
   author:
@@ -23,15 +23,6 @@ export type PackageInfo = {
     type: "git" | "https";
     url: string;
   };
-};
-
-const getPackage = async (path: string): Promise<PackageInfo | null> => {
-  try {
-    const contents = await readFile(path, { encoding: "utf-8" });
-    return JSON.parse(contents);
-  } catch (error) {
-    return null;
-  }
 };
 
 addArg("package", "p", "path to package.json to use", {
