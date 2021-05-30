@@ -125,9 +125,9 @@ export const parseArgs = (cliArgs: string[]): ArgsHash => {
 
         const argVal = arg.hasValue
             ? new ValueArg({
-                  ...arg,
-                  value: cliArgs[cliArgIdx + 1] || arg.defaultValue || "",
-              })
+                ...arg,
+                value: cliArgs[cliArgIdx + 1] || arg.defaultValue || "",
+            })
             : new SimpleArg(arg);
 
         return [long, argVal] as const;
