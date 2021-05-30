@@ -1,28 +1,33 @@
 {
-  "name": "readme-gen",
+  "name": "@userscripters/generate-readme",
   "version": "1.0.0",
   "description": "Readme generator parses package.json file and uses it to create a template README.md",
   "scripts": {
+    "clean": "rm -rf dist",
     "lint": "eslint src --fix --ext .js,.ts",
-    "build": "npm run lint && tsc",
-    "test": "mocha"
+    "prebuild": "npm run test && npm run lint && npm run clean",
+    "build": "npm run prebuild && tsc && npm run executable",
+    "test": "mocha",
+    "executable": "sed -i \"1s/^/#!\\/usr\\/bin\\/env node\\n/\" dist/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/userscripters/template.git"
+    "url": "git+https://github.com/userscripters/generate-readme.git"
   },
   "keywords": [],
   "author": "Oleg Valter <oleg.a.valter@gmail.com>",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/userscripters/template/issues"
+    "url": "https://github.com/userscripters/generate-readme/issues"
   },
-  "homepage": "https://github.com/userscripters/template#readme",
+  "homepage": "https://github.com/userscripters/generate-readme#readme",
   "devDependencies": {
+    "@types/chai-as-promised": "^7.1.4",
     "@types/node": "^15.6.0",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^7.26.0",
     "mocha": "^8.4.0",
     "ts-node": "^9.1.1",

@@ -3,27 +3,27 @@ import { addArg, getValueArg, parseArgs } from "./cli";
 import { generateReadme } from "./readme";
 import { getPackage } from "./utils";
 
-export type PackageInfo = {
-  author:
-    | string
-    | {
-        name: string;
-        email?: string;
-        url?: string;
-      };
-  license: string;
-  homepage: string;
-  name: string;
-  version: `${number}.${number}.${number}`;
-  description: string;
-  bugs: {
-    url: string;
+  export type PackageInfo = {
+    author:
+      | string
+      | {
+          name: string;
+          email?: string;
+          url?: string;
+        };
+    license: string;
+    homepage: string;
+    name: string;
+    version: `${number}.${number}.${number}`;
+    description: string;
+    bugs: {
+      url: string;
+    };
+    repository: {
+      type: "git" | "https";
+      url: string;
+    };
   };
-  repository: {
-    type: "git" | "https";
-    url: string;
-  };
-};
 
 addArg("package", "p", "path to package.json to use", {
   defaultValue: "./package.json",
