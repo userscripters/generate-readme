@@ -52,7 +52,7 @@ const generate = async ({
         return;
     }
 
-    const content = await generateReadme(packageInfo);
+    const content = generateReadme(packageInfo);
 
     if (direct) return content;
 

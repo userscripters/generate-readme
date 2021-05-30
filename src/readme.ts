@@ -3,7 +3,7 @@ import { open } from "fs/promises";
 import type { PackageInfo } from ".";
 import { mdLink, parseAuthor, scase } from "./utils";
 
-export const generateReadme = async (
+export const generateReadme = (
     {
         author,
         description,
