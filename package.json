@@ -1,7 +1,7 @@
 {
   "name": "@userscripters/generate-readme",
   "version": "1.0.0",
-  "description": "Readme generator parses package.json file and uses it to create README.md",
+  "description": "Readme generator parses package.json file and creates a README.md from it",
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "eslint src --fix --ext .js,.ts",
