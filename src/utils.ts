@@ -30,3 +30,8 @@ export const parseAuthor = (
     url,
   };
 };
+
+export const parseName = (name: string) => {
+    const [, scope, packageName] = name.match(/(?:@([\w-]+)\/)?([\w-]+)/) || [];
+    return { scope, packageName };
+};
