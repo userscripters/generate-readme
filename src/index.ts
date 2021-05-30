@@ -1,70 +1,85 @@
 import { bgRed } from "chalk";
-import { addArg, getValueArg, parseArgs } from "./cli";
-import { generateReadme } from "./readme";
+import { addArg, parseArgs } from "./cli";
+import { generateReadme, writeReadme } from "./readme";
 import { getPackage } from "./utils";
 
-  export type PackageInfo = {
+export type PackageInfo = {
     author:
-      | string
-      | {
-          name: string;
-          email?: string;
-          url?: string;
-        };
+        | string
+        | {
+              name: string;
+              email?: string;
+              url?: string;
+          };
     license: string;
     homepage: string;
     name: string;
     version: `${number}.${number}.${number}`;
     description: string;
     bugs: {
-      url: string;
+        url: string;
     };
     repository: {
-      type: "git" | "https";
-      url: string;
+        type: "git" | "https";
+        url: string;
     };
-  };
+};
 
 addArg("package", "p", "path to package.json to use", {
-  defaultValue: "./package.json",
+    defaultValue: "./package.json",
 });
 
 addArg("output", "o", "path to output directory", {
-  defaultValue: "./README.md",
+    defaultValue: "./README.md",
 });
 
-const run = async () => {
-  const {
-    argv: [_path, _file, ...cliArgs],
-  } = process;
-
-  const args = parseArgs(cliArgs);
-
-  const { passed, action } = args["help"];
-  if (passed && action) {
-    const ownPackage = await getPackage("./package.json");
-    if (!ownPackage) {
-      console.log(bgRed`own package.json missing or corrupted`);
-      return;
-    }
-
-    const { description, name } = ownPackage;
-    action(name, description);
-    return;
-  }
-
-  const { value: packagePath } = getValueArg(args, "package")!;
-
-  const contents = await getPackage(packagePath);
-  if (!contents) {
-    console.log(bgRed`package.json file not found or corrupted`);
-    process.exitCode = 1;
-    return;
-  }
-
-  const { value: outputPath } = getValueArg(args, "output")!;
-
-  await generateReadme(outputPath, contents);
+type GeneratorOptions = {
+    direct?: boolean;
+    output?: string;
+    package?: string;
 };
 
-export default run();
+const generate = async ({
+    direct = false,
+    output = "./README.md",
+    package: pkg = "./package.json",
+}: GeneratorOptions) => {
+    const packageInfo = await getPackage(pkg);
+
+    if (!packageInfo) {
+        console.log(bgRed`package.json file not found or corrupted`);
+        process.exitCode = 1;
+        return;
+    }
+
+    const content = await generateReadme(packageInfo);
+
+    if (direct) return content;
+
+    await writeReadme(output, content);
+
+    return content;
+};
+
+const run = async (args: typeof process.argv) => {
+    const { help } = parseArgs(args.slice(2));
+
+    if (help.passed) {
+        const { passed, action } = help;
+        if (!passed || !action) return;
+
+        const ownPackage = await getPackage("./package.json");
+        if (!ownPackage) {
+            console.log(bgRed`own package.json missing or corrupted`);
+            return;
+        }
+
+        help.run(ownPackage);
+
+        return;
+    }
+};
+
+if (require.main === module) run(process.argv);
+
+export { generate };
