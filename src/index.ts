@@ -1,7 +1,7 @@
 import { bgRed } from "chalk";
 import { addArg, parseArgs } from "./cli";
 import { generateReadme, writeReadme } from "./readme";
-import { getPackage } from "./utils";
+import { getPackage, mapObject } from "./utils";
 
 export type PackageInfo = {
     author:
@@ -49,7 +49,7 @@ const generate = async ({
     if (!packageInfo) {
         console.log(bgRed`package.json file not found or corrupted`);
         process.exitCode = 1;
-        return;
+        return "";
     }
 
     const content = generateReadme(packageInfo);
@@ -62,7 +62,7 @@ const generate = async ({
 };
 
 const run = async (args: typeof process.argv) => {
-    const { help } = parseArgs(args.slice(2));
+    const { help, ...rest } = parseArgs(args.slice(2));
 
     if (help.passed) {
         const { passed, action } = help;
@@ -75,9 +75,14 @@ const run = async (args: typeof process.argv) => {
         }
 
         help.run(ownPackage);
-
         return;
     }
+
+    const options = mapObject(rest, (_,v) =>v.hasValue && (v.value || v.defaultValue)  );
+
+    const content = await generate(options);
+
+    return content;
 };
 
 if (require.main === module) run(process.argv);
