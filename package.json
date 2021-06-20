@@ -37,5 +37,8 @@
   },
   "dependencies": {
     "chalk": "^4.1.1"
+  },
+  "bin": {
+    "generate-readme": "dist/index.js"
   }
 }
