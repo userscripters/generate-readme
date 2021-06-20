@@ -9,8 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parseName = exports.parseAuthor = exports.mdLink = exports.scase = exports.getPackage = void 0;
+exports.parseName = exports.parseAuthor = exports.mdLink = exports.scase = exports.getPackage = exports.mapObject = void 0;
 const promises_1 = require("fs/promises");
+const mapObject = (obj, cbk) => {
+    const output = {};
+    Object.entries(obj).forEach(([k, v]) => (output[k] = cbk(k, v)));
+    return output;
+};
+exports.mapObject = mapObject;
 const getPackage = (path) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const contents = yield promises_1.readFile(path, { encoding: "utf-8" });

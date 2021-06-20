@@ -22,5 +22,5 @@ declare type GeneratorOptions = {
     output?: string;
     package?: string;
 };
-declare const generate: ({ direct, output, package: pkg, }: GeneratorOptions) => Promise<string | undefined>;
+declare const generate: ({ direct, output, package: pkg, }: GeneratorOptions) => Promise<string>;
 export { generate };
