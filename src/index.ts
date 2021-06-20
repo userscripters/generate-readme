@@ -78,7 +78,7 @@ const run = async (args: typeof process.argv) => {
         return;
     }
 
-    const options = mapObject(rest, (_,v) =>v.hasValue && (v.value || v.defaultValue)  );
+    const options = mapObject(rest, (_,v) => v.hasValue && (v.value || v.defaultValue) );
 
     const content = await generate(options);
 

@@ -5,9 +5,9 @@ export const mapObject = <
     T extends { [x: string]: any },
     U extends (key: keyof T, val: T[keyof T]) => any
 >(
-    obj: T,
-    cbk: U
-) => {
+        obj: T,
+        cbk: U
+    ) => {
     const output = <{ [P in keyof T]: ReturnType<U> }>{};
     Object.entries(obj).forEach(([k, v]) => (output[k as keyof T] = cbk(k, v)));
     return output;
