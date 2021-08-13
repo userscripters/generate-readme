@@ -3,14 +3,17 @@ import { addArg, parseArgs } from "./cli";
 import { generateReadme, writeReadme } from "./readme";
 import { getPackage, mapObject } from "./utils";
 
+export type PackagePerson =
+    | string
+    | {
+          name: string;
+          email?: string;
+          url?: string;
+      };
+
 export type PackageInfo = {
-    author:
-        | string
-        | {
-              name: string;
-              email?: string;
-              url?: string;
-          };
+    author: PackagePerson;
+    contributors?: PackagePerson[];
     license: string;
     homepage: string;
     name: string;
@@ -78,7 +81,10 @@ const run = async (args: typeof process.argv) => {
         return;
     }
 
-    const options = mapObject(rest, (_,v) => v.hasValue && (v.value || v.defaultValue) );
+    const options = mapObject(
+        rest,
+        (_, v) => v.hasValue && (v.value || v.defaultValue)
+    );
 
     const content = await generate(options);
 
