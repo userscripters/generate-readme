@@ -25,11 +25,19 @@ export const generateReadme = ({
 
     const llink = mdLink(license, `https://spdx.org/licenses/${license}`);
 
+    const contribs = contributors
+        .map((c) => {
+            const { name, email, url } = parseAuthor(c);
+            return `${name}${formatEmail(email)}${formatUrl(url)}`;
+        })
+        .join("<br>");
+
     const content = `
 # About
 
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
+| Contributors | ${contribs}              |
 | Name         | ${scase(packageName)}    |
 | Description  | ${description}           |
 | License      | ${llink}                 |
