@@ -3,22 +3,25 @@ import { open } from "fs/promises";
 import type { PackageInfo } from ".";
 import { mdLink, parseAuthor, scase } from "./utils";
 
-export const generateReadme = (
-    {
-        author,
-        description,
-        license,
-        name: packageName,
-        version,
-        bugs,
-    }: PackageInfo
-) => {
+const formatEmail = (email?: string) =>
+    email ? `<br>email: ${mdLink(email, `mailto:${email}`)}` : "";
+
+const formatUrl = (url?: string) =>
+    url ? `<br>website: ${mdLink(url, url)}` : "";
+
+export const generateReadme = ({
+    author,
+    contributors = [],
+    description,
+    license,
+    name: packageName,
+    version,
+    bugs,
+}: PackageInfo) => {
     const { name, email, url } = parseAuthor(author);
 
-    const aemail = email
-        ? `<br>email: ${mdLink(email, `mailto:${email}`)}`
-        : "";
-    const alink = url ? `<br>website: ${mdLink(url, url)}` : "";
+    const aemail = formatEmail(email);
+    const alink = formatUrl(url);
 
     const llink = mdLink(license, `https://spdx.org/licenses/${license}`);
 
