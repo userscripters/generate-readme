@@ -15,6 +15,12 @@
     "type": "git",
     "url": "git+https://github.com/userscripters/generate-readme.git"
   },
+  "contributors": [
+    {
+      "name": "double beep",
+      "url": "https://github.com/double-beep"
+    }
+  ],
   "keywords": [],
   "author": "Oleg Valter <oleg.a.valter@gmail.com>",
   "license": "GPL-3.0-or-later",
