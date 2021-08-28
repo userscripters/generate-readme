@@ -13,18 +13,25 @@ exports.writeReadme = exports.generateReadme = void 0;
 const chalk_1 = require("chalk");
 const promises_1 = require("fs/promises");
 const utils_1 = require("./utils");
-const generateReadme = ({ author, description, license, name: packageName, version, bugs, }) => {
+const formatEmail = (email) => email ? `<br>${utils_1.mdLink(email, `mailto:${email}`)}` : "";
+const formatUrl = (url) => (url ? `<br>${utils_1.mdLink(url, url)}` : "");
+const generateReadme = ({ author, contributors = [], description, license, name: packageName, version, bugs, }) => {
     const { name, email, url } = utils_1.parseAuthor(author);
-    const aemail = email
-        ? `<br>email: ${utils_1.mdLink(email, `mailto:${email}`)}`
-        : "";
-    const alink = url ? `<br>website: ${utils_1.mdLink(url, url)}` : "";
+    const aemail = formatEmail(email);
+    const alink = formatUrl(url);
     const llink = utils_1.mdLink(license, `https://spdx.org/licenses/${license}`);
+    const contribs = contributors
+        .map((c) => {
+        const { name, email, url } = utils_1.parseAuthor(c);
+        return `${name}${formatEmail(email)}${formatUrl(url)}`;
+    })
+        .join("<br>");
     const content = `
 # About
 
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
+| Contributors | ${contribs}              |
 | Name         | ${utils_1.scase(packageName)}    |
 | Description  | ${description}           |
 | License      | ${llink}                 |

@@ -1,9 +1,11 @@
+export declare type PackagePerson = string | {
+    name: string;
+    email?: string;
+    url?: string;
+};
 export declare type PackageInfo = {
-    author: string | {
-        name: string;
-        email?: string;
-        url?: string;
-    };
+    author: PackagePerson;
+    contributors?: PackagePerson[];
     license: string;
     homepage: string;
     name: string;
