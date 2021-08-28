@@ -4,10 +4,9 @@ import type { PackageInfo } from ".";
 import { mdLink, parseAuthor, scase } from "./utils";
 
 const formatEmail = (email?: string) =>
-    email ? `<br>email: ${mdLink(email, `mailto:${email}`)}` : "";
+    email ? `<br>${mdLink(email, `mailto:${email}`)}` : "";
 
-const formatUrl = (url?: string) =>
-    url ? `<br>website: ${mdLink(url, url)}` : "";
+const formatUrl = (url?: string) => (url ? `<br>${mdLink(url, url)}` : "");
 
 export const generateReadme = ({
     author,
