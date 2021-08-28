@@ -1,12 +1,13 @@
 
 # About
 
-| Author       | Oleg Valter<br>email: [oleg.a.valter@gmail.com](mailto:oleg.a.valter@gmail.com) |
+| Author       | Oleg Valter<br>[oleg.a.valter@gmail.com](mailto:oleg.a.valter@gmail.com)<br>[https://github.com/Oaphi](https://github.com/Oaphi) |
 | :----------- | :----------------------- |
+| Contributors | double beep<br>[https://github.com/double-beep](https://github.com/double-beep)              |
 | Name         | @userscripters/generate-readme    |
-| Description  | Readme generator parses package.json file and uses it to create a template README.md           |
+| Description  | Readme generator parses package.json file and creates a README.md from it           |
 | License      | [GPL-3.0-or-later](https://spdx.org/licenses/GPL-3.0-or-later)                 |
-| Version      | 1.0.0               |
+| Version      | 1.1.0               |
 
 # Support
 
