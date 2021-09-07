@@ -13,9 +13,6 @@ describe("License", () => {
 
         it("should return info on default grant on no license", () => {
             const defaulted = formatLicense();
-
-            console.log(defaulted)
-
             expect(defaulted).to.match(/Not adopted \(see \[(.+?)\]\(.+?\)\)/);
         });
     });
