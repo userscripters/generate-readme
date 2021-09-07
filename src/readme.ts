@@ -22,16 +22,21 @@ export const generateReadme = ({
     const llink = formatLicense(license);
     const contribs = formatContributors(contributors);
 
+    const rows: string[] = [
+        formatMdRow("name", scase(packageName)),
+        formatMdRow("description", description),
+        formatMdRow("license", llink),
+        formatMdRow("version", version),
+    ];
+
+    if (contribs) rows.unshift(formatMdRow("contributors", contribs));
+
     const content = `
 # About
 
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
-${formatMdRow("contributors", contribs)}
-${formatMdRow("name", scase(packageName))}
-${formatMdRow("description", description)}
-${formatMdRow("license", llink)}
-${formatMdRow("version", version)}
+${rows.join("\n")}
 
 # Support
 
