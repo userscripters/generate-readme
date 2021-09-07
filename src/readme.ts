@@ -1,13 +1,10 @@
 import { bgRed } from "chalk";
 import { open } from "fs/promises";
 import { PackageInfo } from ".";
+import { formatContributors } from "./contributors";
+import { formatEmail, formatUrl } from "./formatters";
 import { formatLicense } from "./license";
 import { mdLink, parseAuthor, scase } from "./utils";
-
-const formatEmail = (email?: string) =>
-    email ? `<br>${mdLink(email, `mailto:${email}`)}` : "";
-
-const formatUrl = (url?: string) => (url ? `<br>${mdLink(url, url)}` : "");
 
 export const generateReadme = ({
     author,
@@ -22,15 +19,8 @@ export const generateReadme = ({
 
     const aemail = formatEmail(email);
     const alink = formatUrl(url);
-
     const llink = formatLicense(license);
-
-    const contribs = contributors
-        .map((c) => {
-            const { name, email, url } = parseAuthor(c);
-            return `${name}${formatEmail(email)}${formatUrl(url)}`;
-        })
-        .join("<br>");
+    const contribs = formatContributors(contributors);
 
     const content = `
 # About
