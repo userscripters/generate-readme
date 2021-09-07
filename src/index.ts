@@ -14,7 +14,7 @@ export type PackagePerson =
 export type PackageInfo = {
     author: PackagePerson;
     contributors?: PackagePerson[];
-    license: string;
+    license?: string;
     homepage: string;
     name: string;
     version: `${number}.${number}.${number}`;
