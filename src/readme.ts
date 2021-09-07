@@ -2,7 +2,7 @@ import { bgRed } from "chalk";
 import { open } from "fs/promises";
 import { PackageInfo } from ".";
 import { formatContributors } from "./contributors";
-import { formatEmail, formatUrl } from "./formatters";
+import { formatEmail, formatMdRow, formatUrl } from "./formatters";
 import { formatLicense } from "./license";
 import { mdLink, parseAuthor, scase } from "./utils";
 
@@ -27,11 +27,11 @@ export const generateReadme = ({
 
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
-| Contributors | ${contribs}              |
-| Name         | ${scase(packageName)}    |
-| Description  | ${description}           |
-| License      | ${llink}                 |
-| Version      | ${version}               |
+${formatMdRow("contributors", contribs)}
+${formatMdRow("name", scase(packageName))}
+${formatMdRow("description", description)}
+${formatMdRow("license", llink)}
+${formatMdRow("version", version)}
 
 # Support
 
