@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.writeReadme = exports.generateReadme = void 0;
 const chalk_1 = require("chalk");
 const promises_1 = require("fs/promises");
+const license_1 = require("./license");
 const utils_1 = require("./utils");
 const formatEmail = (email) => email ? `<br>${utils_1.mdLink(email, `mailto:${email}`)}` : "";
 const formatUrl = (url) => (url ? `<br>${utils_1.mdLink(url, url)}` : "");
@@ -19,7 +20,7 @@ const generateReadme = ({ author, contributors = [], description, license, name:
     const { name, email, url } = utils_1.parseAuthor(author);
     const aemail = formatEmail(email);
     const alink = formatUrl(url);
-    const llink = utils_1.mdLink(license, `https://spdx.org/licenses/${license}`);
+    const llink = license_1.formatLicense(license);
     const contribs = contributors
         .map((c) => {
         const { name, email, url } = utils_1.parseAuthor(c);

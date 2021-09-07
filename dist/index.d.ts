@@ -6,7 +6,7 @@ export declare type PackagePerson = string | {
 export declare type PackageInfo = {
     author: PackagePerson;
     contributors?: PackagePerson[];
-    license: string;
+    license?: string;
     homepage: string;
     name: string;
     version: `${number}.${number}.${number}`;
