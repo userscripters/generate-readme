@@ -14,3 +14,8 @@ export const formatUrl = (url?: string) =>
  */
 export const formatMdRow = (title: string, value: string): string =>
     `| ${scase(title)} | ${value} |`;
+
+/**
+ * @summary formats an image link
+ */
+export const formatImage = (url: string, alt = url) => `!${mdLink(alt, alt)}`;
