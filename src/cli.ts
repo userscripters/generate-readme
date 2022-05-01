@@ -40,10 +40,10 @@ class SimpleArg<A extends AnyFunc | undefined> extends Arg<A> {
 class ValueArg<A extends AnyFunc | undefined> extends Arg<A> {
     hasValue: true;
     defaultValue?: string;
-    value!: string;
+    value?: string;
 
     constructor(
-        options: BaseArg<A> & { defaultValue?: string; value: string }
+        options: BaseArg<A> & { defaultValue?: string; value?: string; }
     ) {
         super(options);
         this.hasValue = true;
@@ -56,7 +56,7 @@ type Args<A extends AnyFunc | undefined = AnyFunc> = (
     | ValueArg<A>
 )[];
 
-type ArgOptions = { defaultValue?: string; action?: AnyFunc };
+type ArgOptions = { hasValue?: boolean, defaultValue?: string; action?: AnyFunc; };
 
 export type ArgsHash<A extends AnyFunc | undefined = AnyFunc> = {
     [x: string]: SimpleArg<A> | ValueArg<A>;
@@ -96,7 +96,7 @@ export const addArg = (
     long: string,
     short: string,
     description: string,
-    { defaultValue, action }: ArgOptions = {}
+    { hasValue, defaultValue, action }: ArgOptions = {}
 ) => {
     const base = new Arg({
         long,
@@ -107,7 +107,7 @@ export const addArg = (
     });
 
     args.push(
-        defaultValue !== void 0
+        hasValue
             ? new ValueArg({ ...base, defaultValue, value: defaultValue })
             : new SimpleArg(base)
     );
@@ -121,12 +121,15 @@ export const parseArgs = (cliArgs: string[]): ArgsHash => {
             (cliArg) => cliArg === `--${long}` || cliArg === `-${short}`
         );
 
-        if (cliArgIdx !== -1) arg.passed = true;
+        const passed = cliArgIdx !== -1;
+
+        const value = passed ? cliArgs[cliArgIdx + 1] : void 0;
 
         const argVal = arg.hasValue
             ? new ValueArg({
                 ...arg,
-                value: cliArgs[cliArgIdx + 1] || arg.defaultValue || "",
+                passed,
+                value: value || arg.defaultValue || "",
             })
             : new SimpleArg(arg);
 

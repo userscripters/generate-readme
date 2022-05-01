@@ -30,10 +30,12 @@ export type PackageInfo = {
 
 addArg("package", "p", "path to package.json to use", {
     defaultValue: "./package.json",
+    hasValue: true
 });
 
 addArg("output", "o", "path to output directory", {
     defaultValue: "./README.md",
+    hasValue: true
 });
 
 type GeneratorOptions = {
