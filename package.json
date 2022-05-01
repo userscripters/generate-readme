@@ -1,6 +1,6 @@
 {
   "name": "@userscripters/generate-readme",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Readme generator parses package.json file and creates a README.md from it",
   "scripts": {
     "clean": "rm -rf dist",

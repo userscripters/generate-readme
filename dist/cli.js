@@ -26,7 +26,7 @@ class ValueArg extends Arg {
 }
 const args = [];
 const showHelp = ({ description, name }) => {
-    const { packageName } = utils_1.parseName(name);
+    const { packageName } = (0, utils_1.parseName)(name);
     const describedArgs = args.reduce((acc, { description, long, short }) => `${acc}-${short}, --${long}\t\t${description}\n`, "");
     console.log(`
 ${description}
@@ -44,7 +44,7 @@ args.push(new SimpleArg({
     action: exports.showHelp,
     passed: false,
 }));
-const addArg = (long, short, description, { defaultValue, action } = {}) => {
+const addArg = (long, short, description, { hasValue, defaultValue, action } = {}) => {
     const base = new Arg({
         long,
         short,
@@ -52,7 +52,7 @@ const addArg = (long, short, description, { defaultValue, action } = {}) => {
         action,
         passed: false,
     });
-    args.push(defaultValue !== void 0
+    args.push(hasValue
         ? new ValueArg(Object.assign(Object.assign({}, base), { defaultValue, value: defaultValue }))
         : new SimpleArg(base));
 };
@@ -61,10 +61,10 @@ const parseArgs = (cliArgs) => {
     const mappedToArgs = args.map((arg) => {
         const { long, short } = arg;
         const cliArgIdx = cliArgs.findIndex((cliArg) => cliArg === `--${long}` || cliArg === `-${short}`);
-        if (cliArgIdx !== -1)
-            arg.passed = true;
+        const passed = cliArgIdx !== -1;
+        const value = passed ? cliArgs[cliArgIdx + 1] : void 0;
         const argVal = arg.hasValue
-            ? new ValueArg(Object.assign(Object.assign({}, arg), { value: cliArgs[cliArgIdx + 1] || arg.defaultValue || "" }))
+            ? new ValueArg(Object.assign(Object.assign({}, arg), { passed, value: value || arg.defaultValue || "" }))
             : new SimpleArg(arg);
         return [long, argVal];
     });

@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatMdRow = exports.formatUrl = exports.formatEmail = void 0;
+exports.formatImage = exports.formatMdRow = exports.formatUrl = exports.formatEmail = void 0;
 const utils_1 = require("./utils");
-const formatEmail = (email) => email ? `<br>${utils_1.mdLink(email, `mailto:${email}`)}` : "";
+const formatEmail = (email) => email ? `<br>${(0, utils_1.mdLink)(email, `mailto:${email}`)}` : "";
 exports.formatEmail = formatEmail;
-const formatUrl = (url) => url ? `<br>${utils_1.mdLink(url, url)}` : "";
+const formatUrl = (url) => url ? `<br>${(0, utils_1.mdLink)(url, url)}` : "";
 exports.formatUrl = formatUrl;
-const formatMdRow = (title, value) => `| ${utils_1.scase(title)} | ${value} |`;
+const formatMdRow = (title, value) => `| ${(0, utils_1.scase)(title)} | ${value} |`;
 exports.formatMdRow = formatMdRow;
+const formatImage = (url, alt = url) => `!${(0, utils_1.mdLink)(alt, alt)}`;
+exports.formatImage = formatImage;

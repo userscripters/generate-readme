@@ -26,41 +26,46 @@ const chalk_1 = require("chalk");
 const cli_1 = require("./cli");
 const readme_1 = require("./readme");
 const utils_1 = require("./utils");
-cli_1.addArg("package", "p", "path to package.json to use", {
+(0, cli_1.addArg)("package", "p", "path to package.json to use", {
     defaultValue: "./package.json",
+    hasValue: true
 });
-cli_1.addArg("output", "o", "path to output directory", {
+(0, cli_1.addArg)("output", "o", "path to output directory", {
     defaultValue: "./README.md",
+    hasValue: true
 });
-const generate = ({ direct = false, output = "./README.md", package: pkg = "./package.json", }) => __awaiter(void 0, void 0, void 0, function* () {
-    const packageInfo = yield utils_1.getPackage(pkg);
+(0, cli_1.addArg)("screenshot", "s", "add a screenshot", { hasValue: true });
+const generate = ({ direct = false, output = "./README.md", package: pkg = "./package.json", screenshot }) => __awaiter(void 0, void 0, void 0, function* () {
+    const packageInfo = yield (0, utils_1.getPackage)(pkg);
     if (!packageInfo) {
-        console.log(chalk_1.bgRed `package.json file not found or corrupted`);
+        console.log((0, chalk_1.bgRed) `package.json file not found or corrupted`);
         process.exitCode = 1;
         return "";
     }
-    const content = readme_1.generateReadme(packageInfo);
+    const content = (0, readme_1.generateReadme)(packageInfo, {
+        screenshot
+    });
     if (direct)
         return content;
-    yield readme_1.writeReadme(output, content);
+    yield (0, readme_1.writeReadme)(output, content);
     return content;
 });
 exports.generate = generate;
 const run = (args) => __awaiter(void 0, void 0, void 0, function* () {
-    const _a = cli_1.parseArgs(args.slice(2)), { help } = _a, rest = __rest(_a, ["help"]);
+    const _a = (0, cli_1.parseArgs)(args.slice(2)), { help } = _a, rest = __rest(_a, ["help"]);
     if (help.passed) {
         const { passed, action } = help;
         if (!passed || !action)
             return;
-        const ownPackage = yield utils_1.getPackage("./package.json");
+        const ownPackage = yield (0, utils_1.getPackage)("./package.json");
         if (!ownPackage) {
-            console.log(chalk_1.bgRed `own package.json missing or corrupted`);
+            console.log((0, chalk_1.bgRed) `own package.json missing or corrupted`);
             return;
         }
         help.run(ownPackage);
         return;
     }
-    const options = utils_1.mapObject(rest, (_, v) => v.hasValue && (v.value || v.defaultValue));
+    const options = (0, utils_1.mapObject)(rest, (_, v) => v.hasValue && (v.value || v.defaultValue));
     const content = yield generate(options);
     return content;
 });

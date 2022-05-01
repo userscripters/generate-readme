@@ -19,7 +19,7 @@ const mapObject = (obj, cbk) => {
 exports.mapObject = mapObject;
 const getPackage = (path) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const contents = yield promises_1.readFile(path, { encoding: "utf-8" });
+        const contents = yield (0, promises_1.readFile)(path, { encoding: "utf-8" });
         return JSON.parse(contents);
     }
     catch (error) {
