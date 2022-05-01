@@ -50,7 +50,7 @@ export const generateReadme = ({
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
 ${rows.join("\n")}
-${about ? `\n${about}\n` : ""}
+${about ? `\n${about}` : ""}
 ${screenshots.length ? `# Screenshots\n${screenshots.join("\n")}\n` : ""}
 # Support
 
