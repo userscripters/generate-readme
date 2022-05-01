@@ -28,6 +28,10 @@ export type PackageInfo = {
     };
 };
 
+addArg("about", "a", "custom about text", {
+    hasValue: true
+});
+
 addArg("package", "p", "path to package.json to use", {
     defaultValue: "./package.json",
     hasValue: true
@@ -41,6 +45,7 @@ addArg("output", "o", "path to output directory", {
 addArg("screenshot", "s", "add a screenshot", { hasValue: true });
 
 type GeneratorOptions = {
+    about?: string;
     direct?: boolean;
     output?: string;
     package?: string;
@@ -51,6 +56,7 @@ const generate = async ({
     direct = false,
     output = "./README.md",
     package: pkg = "./package.json",
+    about,
     screenshot
 }: GeneratorOptions) => {
     const packageInfo = await getPackage(pkg);
@@ -62,6 +68,7 @@ const generate = async ({
     }
 
     const content = generateReadme(packageInfo, {
+        about,
         screenshot
     });
 

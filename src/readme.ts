@@ -7,6 +7,7 @@ import { formatLicense } from "./license";
 import { mdLink, parseAuthor, scase } from "./utils";
 
 type GenerateReadmeOptions = {
+    about?: string;
     screenshot?: string;
 };
 
@@ -19,6 +20,7 @@ export const generateReadme = ({
     version,
     bugs,
 }: PackageInfo, {
+    about,
     screenshot
 }: GenerateReadmeOptions = {}) => {
     const { name, email, url } = parseAuthor(author);
@@ -48,6 +50,7 @@ export const generateReadme = ({
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
 ${rows.join("\n")}
+${about ? `\n${about}\n` : ""}
 ${screenshots.length ? `# Screenshots\n${screenshots.join("\n")}\n` : ""}
 # Support
 
