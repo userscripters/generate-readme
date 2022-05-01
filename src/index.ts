@@ -38,16 +38,20 @@ addArg("output", "o", "path to output directory", {
     hasValue: true
 });
 
+addArg("screenshot", "s", "add a screenshot", { hasValue: true });
+
 type GeneratorOptions = {
     direct?: boolean;
     output?: string;
     package?: string;
+    screenshot?: string;
 };
 
 const generate = async ({
     direct = false,
     output = "./README.md",
     package: pkg = "./package.json",
+    screenshot
 }: GeneratorOptions) => {
     const packageInfo = await getPackage(pkg);
 
@@ -57,7 +61,9 @@ const generate = async ({
         return "";
     }
 
-    const content = generateReadme(packageInfo);
+    const content = generateReadme(packageInfo, {
+        screenshot
+    });
 
     if (direct) return content;
 

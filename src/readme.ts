@@ -2,9 +2,13 @@ import { bgRed } from "chalk";
 import { open } from "fs/promises";
 import { PackageInfo } from ".";
 import { formatContributors } from "./contributors";
-import { formatEmail, formatMdRow, formatUrl } from "./formatters";
+import { formatEmail, formatImage, formatMdRow, formatUrl } from "./formatters";
 import { formatLicense } from "./license";
 import { mdLink, parseAuthor, scase } from "./utils";
+
+type GenerateReadmeOptions = {
+    screenshot?: string;
+};
 
 export const generateReadme = ({
     author,
@@ -14,7 +18,9 @@ export const generateReadme = ({
     name: packageName,
     version,
     bugs,
-}: PackageInfo) => {
+}: PackageInfo, {
+    screenshot
+}: GenerateReadmeOptions = {}) => {
     const { name, email, url } = parseAuthor(author);
 
     const aemail = formatEmail(email);
@@ -31,13 +37,18 @@ export const generateReadme = ({
 
     if (contribs) rows.unshift(formatMdRow("contributors", contribs));
 
+    const screenshots: string[] = [];
+    if (screenshot) {
+        screenshots.push(formatImage(screenshot));
+    }
+
     const content = `
 # About
 
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
 ${rows.join("\n")}
-
+${screenshots.length ? `# Screenshots\n${screenshots.join("\n")}\n` : ""}
 # Support
 
 Bug reports for the project should be ${mdLink("submitted here", bugs.url)}.
