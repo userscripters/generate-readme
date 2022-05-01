@@ -20,10 +20,11 @@ export declare type PackageInfo = {
     };
 };
 declare type GeneratorOptions = {
+    about?: string;
     direct?: boolean;
     output?: string;
     package?: string;
     screenshot?: string;
 };
-declare const generate: ({ direct, output, package: pkg, screenshot }: GeneratorOptions) => Promise<string>;
+declare const generate: ({ direct, output, package: pkg, about, screenshot }: GeneratorOptions) => Promise<string>;
 export { generate };

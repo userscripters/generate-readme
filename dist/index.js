@@ -26,6 +26,9 @@ const chalk_1 = require("chalk");
 const cli_1 = require("./cli");
 const readme_1 = require("./readme");
 const utils_1 = require("./utils");
+(0, cli_1.addArg)("about", "a", "custom about text", {
+    hasValue: true
+});
 (0, cli_1.addArg)("package", "p", "path to package.json to use", {
     defaultValue: "./package.json",
     hasValue: true
@@ -35,7 +38,7 @@ const utils_1 = require("./utils");
     hasValue: true
 });
 (0, cli_1.addArg)("screenshot", "s", "add a screenshot", { hasValue: true });
-const generate = ({ direct = false, output = "./README.md", package: pkg = "./package.json", screenshot }) => __awaiter(void 0, void 0, void 0, function* () {
+const generate = ({ direct = false, output = "./README.md", package: pkg = "./package.json", about, screenshot }) => __awaiter(void 0, void 0, void 0, function* () {
     const packageInfo = yield (0, utils_1.getPackage)(pkg);
     if (!packageInfo) {
         console.log((0, chalk_1.bgRed) `package.json file not found or corrupted`);
@@ -43,6 +46,7 @@ const generate = ({ direct = false, output = "./README.md", package: pkg = "./pa
         return "";
     }
     const content = (0, readme_1.generateReadme)(packageInfo, {
+        about,
         screenshot
     });
     if (direct)

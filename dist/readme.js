@@ -16,7 +16,7 @@ const contributors_1 = require("./contributors");
 const formatters_1 = require("./formatters");
 const license_1 = require("./license");
 const utils_1 = require("./utils");
-const generateReadme = ({ author, contributors = [], description, license, name: packageName, version, bugs, }, { screenshot } = {}) => {
+const generateReadme = ({ author, contributors = [], description, license, name: packageName, version, bugs, }, { about, screenshot } = {}) => {
     const { name, email, url } = (0, utils_1.parseAuthor)(author);
     const aemail = (0, formatters_1.formatEmail)(email);
     const alink = (0, formatters_1.formatUrl)(url);
@@ -40,6 +40,7 @@ const generateReadme = ({ author, contributors = [], description, license, name:
 | Author       | ${name}${aemail}${alink} |
 | :----------- | :----------------------- |
 ${rows.join("\n")}
+${about ? `\n${about}\n` : ""}
 ${screenshots.length ? `# Screenshots\n${screenshots.join("\n")}\n` : ""}
 # Support
 
