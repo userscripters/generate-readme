@@ -1,6 +1,6 @@
 import { PackageInfo } from ".";
-declare type AnyFunc = (...args: any[]) => any;
-declare type BaseArg<A extends AnyFunc | undefined> = {
+type AnyFunc = (...args: any[]) => any;
+type BaseArg<A extends AnyFunc | undefined> = {
     short: string;
     long: string;
     description: string;
@@ -29,12 +29,12 @@ declare class ValueArg<A extends AnyFunc | undefined> extends Arg<A> {
         value?: string;
     });
 }
-declare type ArgOptions = {
+type ArgOptions = {
     hasValue?: boolean;
     defaultValue?: string;
     action?: AnyFunc;
 };
-export declare type ArgsHash<A extends AnyFunc | undefined = AnyFunc> = {
+export type ArgsHash<A extends AnyFunc | undefined = AnyFunc> = {
     [x: string]: SimpleArg<A> | ValueArg<A>;
 };
 export declare const showHelp: ({ description, name }: PackageInfo) => void;

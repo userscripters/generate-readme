@@ -55,13 +55,18 @@ const writeReadme = (path, content) => __awaiter(void 0, void 0, void 0, functio
         const handle = yield (0, promises_1.open)(path, "w+");
         yield handle.write(content);
     }
-    catch ({ name, message }) {
-        const errorLog = `Failed to generate README:
+    catch (error) {
+        if (error instanceof Error) {
+            const errorLog = `Failed to generate README:
 
-    ${(0, chalk_1.bgRed)(name)}
-    ${message}
+    ${(0, chalk_1.bgRed)(error === null || error === void 0 ? void 0 : error.name)}
+    ${error === null || error === void 0 ? void 0 : error.message}
       `;
-        console.log(errorLog);
+            console.log(errorLog);
+        }
+        else {
+            console.log("Unexpected error", error);
+        }
         process.exitCode = 1;
     }
 });

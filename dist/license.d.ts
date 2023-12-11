@@ -1,1 +1,1 @@
-export declare const formatLicense: (license?: string | undefined) => string;
+export declare const formatLicense: (license?: string) => string;

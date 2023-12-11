@@ -65,14 +65,18 @@ export const writeReadme = async (path: string, content: string) => {
     try {
         const handle = await open(path, "w+");
         await handle.write(content);
-    } catch ({ name, message }) {
-        const errorLog = `Failed to generate README:
+    } catch (error) {
+        if (error instanceof Error) {
+            const errorLog = `Failed to generate README:
 
-    ${bgRed(name)}
-    ${message}
+    ${bgRed(error?.name)}
+    ${error?.message}
       `;
 
-        console.log(errorLog);
+            console.log(errorLog);
+        } else {
+            console.log("Unexpected error", error);
+        }
 
         process.exitCode = 1;
     }

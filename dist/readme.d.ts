@@ -1,5 +1,5 @@
 import { PackageInfo } from ".";
-declare type GenerateReadmeOptions = {
+type GenerateReadmeOptions = {
     about?: string;
     screenshot?: string;
 };

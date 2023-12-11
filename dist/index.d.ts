@@ -1,9 +1,9 @@
-export declare type PackagePerson = string | {
+export type PackagePerson = string | {
     name: string;
     email?: string;
     url?: string;
 };
-export declare type PackageInfo = {
+export type PackageInfo = {
     author: PackagePerson;
     contributors?: PackagePerson[];
     license?: string;
@@ -19,7 +19,7 @@ export declare type PackageInfo = {
         url: string;
     };
 };
-declare type GeneratorOptions = {
+type GeneratorOptions = {
     about?: string;
     direct?: boolean;
     output?: string;
