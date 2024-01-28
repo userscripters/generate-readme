@@ -1,4 +1,4 @@
-import { mdLink, scase } from "./utils";
+import { mdLink, scase } from "./utils.js";
 
 export const formatEmail = (email?: string) =>
     email ? `<br>${mdLink(email, `mailto:${email}`)}` : "";

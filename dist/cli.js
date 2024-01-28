@@ -1,4 +1,4 @@
-import { parseName } from "./utils";
+import { parseName } from "./utils.js";
 class Arg {
     constructor(options) {
         Object.assign(this, options);

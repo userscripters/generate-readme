@@ -1,4 +1,4 @@
-import { mdLink, scase } from "./utils";
+import { mdLink, scase } from "./utils.js";
 export const formatEmail = (email) => email ? `<br>${mdLink(email, `mailto:${email}`)}` : "";
 export const formatUrl = (url) => url ? `<br>${mdLink(url, url)}` : "";
 export const formatMdRow = (title, value) => `| ${scase(title)} | ${value} |`;

@@ -1,5 +1,5 @@
 import { PackageInfo } from ".";
-import { parseName } from "./utils";
+import { parseName } from "./utils.js";
 
 type AnyFunc = (...args: any[]) => any;
 

@@ -1,4 +1,4 @@
-import { mdLink } from "./utils";
+import { mdLink } from "./utils.js";
 
 /**
  * @summary formats a license field

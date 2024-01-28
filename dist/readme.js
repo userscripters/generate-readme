@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import chulk from "chalk";
 import { open } from "fs/promises";
-import { formatContributors } from "./contributors";
-import { formatEmail, formatImage, formatMdRow, formatUrl } from "./formatters";
-import { formatLicense } from "./license";
-import { mdLink, parseAuthor, scase } from "./utils";
+import { formatContributors } from "./contributors.js";
+import { formatEmail, formatImage, formatMdRow, formatUrl } from "./formatters.js";
+import { formatLicense } from "./license.js";
+import { mdLink, parseAuthor, scase } from "./utils.js";
 export const generateReadme = ({ author, contributors = [], description, license, name: packageName, version, bugs, }, { about, screenshot } = {}) => {
     const { name, email, url } = parseAuthor(author);
     const aemail = formatEmail(email);

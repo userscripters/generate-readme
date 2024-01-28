@@ -1,4 +1,4 @@
-import { mdLink } from "./utils";
+import { mdLink } from "./utils.js";
 export const formatLicense = (license) => {
     return license
         ? mdLink(license, `https://spdx.org/licenses/${license}`)

@@ -1,10 +1,10 @@
 import chulk from "chalk";
 import { open } from "fs/promises";
 import { PackageInfo } from ".";
-import { formatContributors } from "./contributors";
-import { formatEmail, formatImage, formatMdRow, formatUrl } from "./formatters";
-import { formatLicense } from "./license";
-import { mdLink, parseAuthor, scase } from "./utils";
+import { formatContributors } from "./contributors.js";
+import { formatEmail, formatImage, formatMdRow, formatUrl } from "./formatters.js";
+import { formatLicense } from "./license.js";
+import { mdLink, parseAuthor, scase } from "./utils.js";
 
 type GenerateReadmeOptions = {
     about?: string;

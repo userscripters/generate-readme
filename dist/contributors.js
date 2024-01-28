@@ -1,5 +1,5 @@
-import { formatEmail, formatUrl } from "./formatters";
-import { parseAuthor } from "./utils";
+import { formatEmail, formatUrl } from "./formatters.js";
+import { parseAuthor } from "./utils.js";
 export const formatContributors = (contributors) => {
     return contributors
         .map((c) => {

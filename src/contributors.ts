@@ -1,6 +1,6 @@
 import { PackagePerson } from ".";
-import { formatEmail, formatUrl } from "./formatters";
-import { parseAuthor } from "./utils";
+import { formatEmail, formatUrl } from "./formatters.js";
+import { parseAuthor } from "./utils.js";
 
 /**
  * @summary formats a 'contributors' field
