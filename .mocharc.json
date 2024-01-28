@@ -1,11 +1,15 @@
 {
     "$schema": "https://json.schemastore.org/mocharc.json",
-    "require": "ts-node/register",
     "extensions": [
+        "js",
         "ts",
         "tsx"
     ],
     "spec": [
         "test/**/*.spec.*"
+    ],
+    "node-option": [
+        "experimental-specifier-resolution=node",
+        "loader=ts-node/esm"
     ]
 }

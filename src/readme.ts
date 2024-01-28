@@ -1,4 +1,4 @@
-import { bgRed } from "chalk";
+import chulk from "chalk";
 import { open } from "fs/promises";
 import { PackageInfo } from ".";
 import { formatContributors } from "./contributors";
@@ -69,7 +69,7 @@ export const writeReadme = async (path: string, content: string) => {
         if (error instanceof Error) {
             const errorLog = `Failed to generate README:
 
-    ${bgRed(error?.name)}
+    ${chulk.bgRed(error?.name)}
     ${error?.message}
       `;
 

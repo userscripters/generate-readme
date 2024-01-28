@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { readFile, unlink } from "fs/promises";
-import { generate, PackageInfo } from "../src/index";
-import { getPackage } from "../src/utils";
+import { generate, PackageInfo } from "../src/index.js";
+import { getPackage } from "../src/utils.js";
 
 describe("CLI", () => {
     it("everything works ok", () => {

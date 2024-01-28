@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getValueArg = exports.parseArgs = exports.addArg = exports.showHelp = void 0;
-const utils_1 = require("./utils");
+import { parseName } from "./utils";
 class Arg {
     constructor(options) {
         Object.assign(this, options);
@@ -25,8 +22,8 @@ class ValueArg extends Arg {
     }
 }
 const args = [];
-const showHelp = ({ description, name }) => {
-    const { packageName } = (0, utils_1.parseName)(name);
+export const showHelp = ({ description, name }) => {
+    const { packageName } = parseName(name);
     const describedArgs = args.reduce((acc, { description, long, short }) => `${acc}-${short}, --${long}\t\t${description}\n`, "");
     console.log(`
 ${description}
@@ -36,15 +33,14 @@ Usage: ${packageName} [options]
 All Options:
 ${describedArgs}`);
 };
-exports.showHelp = showHelp;
 args.push(new SimpleArg({
     short: "h",
     long: "help",
     description: "show command help",
-    action: exports.showHelp,
+    action: showHelp,
     passed: false,
 }));
-const addArg = (long, short, description, { hasValue, defaultValue, action } = {}) => {
+export const addArg = (long, short, description, { hasValue, defaultValue, action } = {}) => {
     const base = new Arg({
         long,
         short,
@@ -56,8 +52,7 @@ const addArg = (long, short, description, { hasValue, defaultValue, action } = {
         ? new ValueArg(Object.assign(Object.assign({}, base), { defaultValue, value: defaultValue }))
         : new SimpleArg(base));
 };
-exports.addArg = addArg;
-const parseArgs = (cliArgs) => {
+export const parseArgs = (cliArgs) => {
     const mappedToArgs = args.map((arg) => {
         const { long, short } = arg;
         const cliArgIdx = cliArgs.findIndex((cliArg) => cliArg === `--${long}` || cliArg === `-${short}`);
@@ -70,9 +65,7 @@ const parseArgs = (cliArgs) => {
     });
     return Object.fromEntries(mappedToArgs);
 };
-exports.parseArgs = parseArgs;
-const getValueArg = (args, key) => {
+export const getValueArg = (args, key) => {
     const arg = args[key];
     return arg.hasValue ? arg : null;
 };
-exports.getValueArg = getValueArg;

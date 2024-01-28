@@ -1,7 +1,8 @@
-import { bgRed } from "chalk";
-import { addArg, parseArgs } from "./cli";
-import { generateReadme, writeReadme } from "./readme";
-import { getPackage, mapObject } from "./utils";
+import { pathToFileURL } from "url";
+import chulk from "chalk";
+import { addArg, parseArgs } from "./cli.js";
+import { generateReadme, writeReadme } from "./readme.js";
+import { getPackage, mapObject } from "./utils.js";
 
 export type PackagePerson =
     | string
@@ -62,7 +63,7 @@ const generate = async ({
     const packageInfo = await getPackage(pkg);
 
     if (!packageInfo) {
-        console.log(bgRed`package.json file not found or corrupted`);
+        console.log(chulk.bgRed`package.json file not found or corrupted`);
         process.exitCode = 1;
         return "";
     }
@@ -88,7 +89,7 @@ const run = async (args: typeof process.argv) => {
 
         const ownPackage = await getPackage("./package.json");
         if (!ownPackage) {
-            console.log(bgRed`own package.json missing or corrupted`);
+            console.log(chulk.bgRed`own package.json missing or corrupted`);
             return;
         }
 
@@ -106,6 +107,6 @@ const run = async (args: typeof process.argv) => {
     return content;
 };
 
-if (require.main === module) run(process.argv);
+if (import.meta.url === pathToFileURL(process.argv[1]).href) run(process.argv);
 
 export { generate };

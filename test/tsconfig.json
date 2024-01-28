@@ -1,9 +1,9 @@
 {
     "extends": "../tsconfig.json",
     "compilerOptions": {
-        "allowJs": false,
-        "checkJs": false,
-        "noEmit": true
+        "noEmit": true,
+        "module": "esnext",
+        "esModuleInterop": true
     },
     "include": ["."],
     "exclude": []

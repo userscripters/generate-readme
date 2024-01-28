@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { formatLicense } from "../../src/license";
+import { formatLicense } from "../../src/license.js";
 
 describe("License", () => {
     describe("formatLicense", () => {

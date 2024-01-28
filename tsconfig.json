@@ -7,7 +7,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "declaration": true,
     "target": "ES6",
-    "module": "CommonJS",
+    "module": "es2020",
     "moduleResolution": "node",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
