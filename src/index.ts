@@ -1,4 +1,5 @@
-import { pathToFileURL } from "url";
+import { createRequire } from "module";
+import { fileURLToPath } from "url";
 import chulk from "chalk";
 import { addArg, parseArgs } from "./cli.js";
 import { generateReadme, writeReadme } from "./readme.js";
@@ -107,6 +108,8 @@ const run = async (args: typeof process.argv) => {
     return content;
 };
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) run(process.argv);
+const scriptPath = createRequire(import.meta.url).resolve(process.argv[1]);
+const modulePath = fileURLToPath(import.meta.url);
+if (modulePath === scriptPath) run(process.argv);
 
 export { generate };
