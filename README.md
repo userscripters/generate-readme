@@ -7,7 +7,7 @@
 | Name | @userscripters/generate-readme |
 | Description | Readme generator parses package.json file and creates a README.md from it |
 | License | [GPL-3.0-or-later](https://spdx.org/licenses/GPL-3.0-or-later) |
-| Version | 2.3.1 |
+| Version | 3.0.0 |
 
 
 # Support
