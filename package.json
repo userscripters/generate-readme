@@ -31,15 +31,15 @@
   "homepage": "https://github.com/userscripters/generate-readme#readme",
   "devDependencies": {
     "@types/chai": "^4.3.16",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^20.14.2",
-    "@typescript-eslint/eslint-plugin": "^7.13.0",
-    "@typescript-eslint/parser": "^7.13.0",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.14.8",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
     "chai": "^5.1.1",
     "eslint": "^8.57.0",
     "mocha": "^10.4.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "dependencies": {
     "chalk": "^5.3.0"
