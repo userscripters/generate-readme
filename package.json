@@ -31,7 +31,7 @@
   "homepage": "https://github.com/userscripters/generate-readme#readme",
   "devDependencies": {
     "@types/chai": "^4.3.19",
-    "@types/mocha": "^10.0.7",
+    "@types/mocha": "^10.0.8",
     "@types/node": "^20.16.5",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
@@ -39,7 +39,7 @@
     "eslint": "^8.57.0",
     "mocha": "^10.7.3",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.6.2"
   },
   "dependencies": {
     "chalk": "^5.3.0"
